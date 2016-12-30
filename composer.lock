@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fe3ca058bc76ffb8413d5a57cde06711",
+    "hash": "fd24fdbc60a5cd718380d1382a8cda9f",
     "content-hash": "c46528705f7b94bc1e767bf01612d7d0",
     "packages": [
         {
@@ -84,16 +84,16 @@
         },
         {
             "name": "zendframework/zend-crypt",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-crypt.git",
-                "reference": "caadff93c6a5a3d17aab72f026a4a883e33a3e94"
+                "reference": "274cdcb77a2165d6aff36b606e9d1c687ba9386c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-crypt/zipball/caadff93c6a5a3d17aab72f026a4a883e33a3e94",
-                "reference": "caadff93c6a5a3d17aab72f026a4a883e33a3e94",
+                "url": "https://api.github.com/repos/zendframework/zend-crypt/zipball/274cdcb77a2165d6aff36b606e9d1c687ba9386c",
+                "reference": "274cdcb77a2165d6aff36b606e9d1c687ba9386c",
                 "shasum": ""
             },
             "require": {
@@ -104,7 +104,7 @@
                 "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.8",
+                "phpunit/phpunit": "^5.6.7",
                 "squizlabs/php_codesniffer": "^2.3.1"
             },
             "suggest": {
@@ -131,7 +131,7 @@
                 "crypt",
                 "zf2"
             ],
-            "time": "2016-08-11 16:40:18"
+            "time": "2016-12-06 15:33:37"
         },
         {
             "name": "zendframework/zend-math",

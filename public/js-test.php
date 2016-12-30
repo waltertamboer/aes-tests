@@ -1,45 +1,47 @@
+<?php
+
+use Zend\Crypt\BlockCipher;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+function createBlockCipher($password)
+{
+    $blockCipher = BlockCipher::factory('openssl', [
+        'algo' => 'aes',
+        'mode' => 'cbc',
+        'padding' => 'pkcs7',
+    ]);
+
+    $blockCipher->setKey($password);
+
+    if (!empty($_GET['ajax_salt'])) {
+        $blockCipher->setSalt($_GET['ajax_salt']);
+    }
+    $blockCipher->setKeyIteration(5000);
+
+    return $blockCipher;
+}
+
+
+if (isset($_GET['ajax_encrypt'])) {
+    echo json_encode(createBlockCipher($_GET['ajax_password'])->encrypt($_GET['ajax_encrypt']), JSON_PRETTY_PRINT);
+    exit;
+}
+
+if (isset($_GET['ajax_decrypt'])) {
+    echo json_encode(createBlockCipher($_GET['ajax_password'])->decrypt($_GET['ajax_decrypt']), JSON_PRETTY_PRINT);
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>AES Test</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="../bower_components/crypto-js/crypto-js.js"></script>
-        <script type="text/javascript">
-
-            var salt = CryptoJS.lib.WordArray.random(16);
-            var iv = CryptoJS.lib.WordArray.random(16);
-
-            var key256Bits = CryptoJS.PBKDF2('password', salt, {
-                keySize: 256 / 32,
-                iterations: 5000,
-                hasher: CryptoJS.algo.SHA256
-            });
-
-            var encrypted = CryptoJS.AES.encrypt('hello world', key256Bits, {
-                iv: iv,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7,
-                hasher: CryptoJS.algo.SHA256
-            });
-
-            var hash = CryptoJS.HmacSHA256('hello world', 'password');
-            var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-
-            console.log(encrypted);
-            console.log(encrypted.toString());
-            console.log(hashInBase64);
-
-            var decrypted = CryptoJS.AES.decrypt(encrypted, key256Bits, {
-                iv: iv,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7,
-                hasher: CryptoJS.algo.SHA256
-
-            });
-
-            console.log(decrypted.toString(CryptoJS.enc.Utf8));
-
-        </script>
+        <script type="text/javascript" src="js/js-test.js"></script>
     </head>
     <body>
 
@@ -49,3 +51,5 @@
 
     </body>
 </html>
+
+

@@ -4,10 +4,8 @@ use Zend\Crypt\BlockCipher;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-function createBlockCipher()
+function createBlockCipher($password = 'password')
 {
-    $password = 'password';
-
     $blockCipher = BlockCipher::factory('openssl', [
         'algo' => 'aes',
         'mode' => 'cbc',
@@ -23,6 +21,7 @@ function createBlockCipher()
 $encrypted = createBlockCipher()->encrypt('The time is ' . date('H:i:s'));
 
 echo sprintf('<p>Encrypted: %s</p>', $encrypted);
+echo sprintf('<p>Encrypted length: %s</p>', strlen($encrypted));
 echo sprintf('<p>Decrypted: %s</p>', createBlockCipher()->decrypt($encrypted));
 
 if (!empty($_GET['value'])) {
